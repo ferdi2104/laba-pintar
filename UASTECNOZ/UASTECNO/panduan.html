@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Sistem - Laba Pintar Elite</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2857/2857433.png" type="image/png">
+    <link rel="stylesheet" href="desain.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="top-navbar">
+        <div class="logo">
+            <h1>Laba Pintar <span>ELITE</span></h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="panduan.html" class="active">Panduan Sistem</a>
+            <a href="tentang.html">Tim Kami</a>
+        </div>
+        <!-- Drag Mode Toggle -->
+        <button class="theme-btn" onclick="toggleTheme()" title="Switch Theme (Drag Mode)">
+            🌙
+        </button>
+    </nav>
+
+    <div class="main-layout" style="display: block;">
+
+        <div class="panel">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="font-size: 32px; margin-bottom: 10px; color: var(--text-main);">User Guide</h2>
+                <p style="color: var(--text-muted);">Panduan langkah demi langkah menggunakan sistem Laba Pintar Elite
+                </p>
+            </div>
+
+            <div class="guide-grid">
+                <!-- Step 1 -->
+                <div class="guide-step">
+                    <span class="step-number">01</span>
+                    <div class="step-content">
+                        <h4>Harga Pembelian (HPP)</h4>
+                        <p>Masukkan harga modal satuan barang Anda. Pastikan harga ini adalah harga bersih pembelian
+                            dari supplier.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="guide-step">
+                    <span class="step-number">02</span>
+                    <div class="step-content">
+                        <h4>Biaya Operasional</h4>
+                        <p>Hitung biaya pendukung seperti packing (kardus/bubble wrap), bensin, atau listrik per-item.
+                            Jangan dikosongkan agar akurasi maksimal.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="guide-step">
+                    <span class="step-number">03</span>
+                    <div class="step-content">
+                        <h4>Target Profit Bersih</h4>
+                        <p>Tentukan persentase keuntungan murni yang ingin Anda terima <b>dari modal</b>. (Contoh: 20% -
+                            30%).</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="guide-step">
+                    <span class="step-number">04</span>
+                    <div class="step-content">
+                        <h4>Biaya Admin Marketplace</h4>
+                        <p>Sistem menggunakan <i>Gross Up Method</i>. Harga jual akan otomatis dinaikkan agar profit
+                            Anda tidak terpotong biaya admin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-box">
+                <p>Siap untuk menghitung keuntungan maksimal bisnis Anda?</p>
+                <a href="index.html" class="btn-calculate"
+                    style="text-decoration: none; padding: 15px 40px; display: inline-block; width: auto; font-size: 14px;">Mulai
+                    Sekarang</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="fungsi_perhitungan.js"></script>
+</body>
+
+</html>

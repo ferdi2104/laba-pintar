@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laba Pintar Pro - Dashboard Hitung UMKM</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2857/2857433.png" type="image/png">
+    <link rel="stylesheet" href="desain.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Chart.js for High-End Visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Open Graph for SEO -->
+    <meta property="og:title" content="Laba Pintar Elite - Kalkulator Profit UMKM">
+    <meta property="og:description"
+        content="Hitung harga jual, margin keuntungan, dan biaya admin marketplace dengan akurat.">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1000">
+</head>
+
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <div class="logo">
+            <h1>Laba Pintar <span>ELITE</span></h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Dashboard</a>
+            <a href="panduan.html">Panduan Sistem</a>
+            <a href="tentang.html">Tim Kami</a>
+        </div>
+        <!-- Drag Mode (Dark Mode) Toggle -->
+        <button class="theme-btn" onclick="toggleTheme()" title="Switch Theme (Drag Mode)">
+            🌙
+        </button>
+    </nav>
+
+    <div class="main-layout">
+
+        <!-- Left Column: Input Section -->
+        <div class="panel input-panel">
+            <div class="panel-header">
+                <h2>Konfigurasi Produk</h2>
+                <p>Masukkan detail modal dan target operasi Anda.</p>
+            </div>
+
+            <!-- Product Name Input -->
+            <div class="input-group" style="margin-bottom: 20px;">
+                <label>Nama Produk</label>
+                <div class="input-wrapper">
+                    <input type="text" id="namaProduk" placeholder="Contoh: Keripik Pisang Coklat 250gr"
+                        class="no-prefix" style="padding-left: 14px;">
+                </div>
+            </div>
+
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Harga Pokok (HPP)</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">Rp</span>
+                        <input type="text" id="hpp" placeholder="0" onkeyup="formatCurrency(this)">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Biaya Operasional</label>
+                    <div class="input-wrapper">
+                        <span class="input-prefix">Rp</span>
+                        <input type="text" id="operasional" placeholder="0" onkeyup="formatCurrency(this)">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Target Margin Profit</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="margin" placeholder="20" class="no-prefix"
+                            style="padding-right: 40px;">
+                        <span class="input-suffix">%</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Admin Marketplace</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="adminFee" placeholder="0" class="no-prefix"
+                            style="padding-right: 40px;">
+                        <span class="input-suffix">%</span>
+                    </div>
+
+                    <!-- Quick Select Buttons (New Feature) -->
+                    <div class="quick-select" style="margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap;">
+                        <button onclick="setAdmin(6.5)" class="badge-btn shopee">Shopee 6.5%</button>
+                        <button onclick="setAdmin(4.5)" class="badge-btn tokped">Tokped 4.5%</button>
+                        <button onclick="setAdmin(6.0)" class="badge-btn tiktok">TikTok 6%</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-area">
+                <button onclick="hitungHarga()" class="btn-calculate">Kalkulasi Detail</button>
+                <button onclick="resetForm()" class="btn-reset">Reset Data</button>
+            </div>
+        </div>
+
+        <!-- Right Column: Result Dashboard -->
+        <div class="panel result-panel">
+            <div class="result-header">
+                <h3>Analisa Keuntungan</h3>
+                <div class="badge">LIVE CHART</div>
+            </div>
+
+            <div class="main-result">
+                <p class="label">Rekomendasi Harga Jual</p>
+                <h1 class="final-price" id="hargaJual">Rp 0</h1>
+            </div>
+
+            <!-- Interactive Chart -->
+            <div class="chart-container" style="position: relative; height:220px; width:100%; margin-bottom: 25px;">
+                <canvas id="profitChart"></canvas>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Total Modal</span>
+                    <span class="stat-value" id="totalModal">Rp 0</span>
+                </div>
+                <div class="stat-card profit">
+                    <span class="stat-label">Profit Bersih</span>
+                    <span class="stat-value" id="profitBersih">Rp 0</span>
+                </div>
+                <div class="stat-card expense">
+                    <span class="stat-label">Potongan Admin</span>
+                    <span class="stat-value" id="potonganAdmin">Rp 0</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Panel: History Log -->
+        <div class="panel history-panel" style="grid-column: 1 / -1; margin-top: -20px;">
+            <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Riwayat Kalkulasi</h2>
+                <div class="history-actions">
+                    <button onclick="exportToCSV()"
+                        style="background: var(--success); border: none; color: white; padding: 6px 15px; border-radius: 8px; cursor: pointer; font-size: 11px; font-weight: 700; margin-right: 10px; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        📥 Download CSV
+                    </button>
+                    <button onclick="clearHistory()" class="btn-reset" style="padding: 6px 15px; font-size: 11px;">
+                        🗑️ Hapus Riwayat
+                    </button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Waktu</th>
+                            <th>Produk</th>
+                            <th>Total Modal</th>
+                            <th>Margin</th>
+                            <th>Admin Fee</th>
+                            <th>Harga Jual</th>
+                            <th>Profit Bersih</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <!-- Data will be inserted here -->
+                        <tr>
+                            <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 20px;">Belum
+                                ada riwayat perhitungan.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Laba Pintar Elite. Platform Perhitungan Profitabilitas Profesional.</p>
+    </footer>
+
+    <script src="fungsi_perhitungan.js"></script>
+</body>
+
+</html>

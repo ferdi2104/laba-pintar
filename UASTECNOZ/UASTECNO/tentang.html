@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tim Laba Pintar Elite</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2857/2857433.png" type="image/png">
+    <link rel="stylesheet" href="desain.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <div class="logo">
+            <h1>Laba Pintar <span>ELITE</span></h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="panduan.html">Panduan Sistem</a>
+            <a href="tentang.html" class="active">Tim Kami</a>
+        </div>
+        <!-- Drag Mode Toggle -->
+        <button class="theme-btn" onclick="toggleTheme()" title="Switch Theme (Drag Mode)">
+            🌙
+        </button>
+    </nav>
+
+    <div class="main-layout" style="display: block; max-width: 1200px;">
+
+        <div class="panel" style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-size: 32px; margin-bottom: 10px; color: var(--text-main);">The Developers</h2>
+            <p style="color: var(--text-muted);">Kenalan dengan tim dibalik layar Laba Pintar</p>
+
+            <div class="team-grid">
+                <!-- Card 1 -->
+                <div class="team-card" onclick="bukaProfil('rizqy')">
+                    <img src="https://ui-avatars.com/api/?name=Rizqy+Naufal&background=d4af37&color=000&size=128"
+                        style="width: 80px; border-radius: 50%; border: 2px solid white; margin-bottom: 15px;">
+                    <h3>Rizqy Naufal Pradana</h3>
+                    <p>Leader Developer</p>
+                    <span class="click-hint">View Profile</span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="team-card" onclick="bukaProfil('bayu')">
+                    <img src="https://ui-avatars.com/api/?name=Bayu+Nugroho&background=3b82f6&color=fff&size=128"
+                        style="width: 80px; border-radius: 50%; border: 2px solid white; margin-bottom: 15px;">
+                    <h3>K Bayu Nugroho</h3>
+                    <p>UI/UX Designer</p>
+                    <span class="click-hint">View Profile</span>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="team-card" onclick="bukaProfil('yasir')">
+                    <img src="https://ui-avatars.com/api/?name=Yasir+Fatah&background=10b981&color=fff&size=128"
+                        style="width: 80px; border-radius: 50%; border: 2px solid white; margin-bottom: 15px;">
+                    <h3>M Yasir Al Fatah</h3>
+                    <p>Researcher & Analyst</p>
+                    <span class="click-hint">View Profile</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; color: var(--text-muted); font-size: 13px;">
+                <p>Version 2.5.0 (Elite Edition) &bull; Built with Passion in Yogyakarta, ID.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal Popup -->
+    <div id="modalOverlay" class="modal-overlay" onclick="tutupProfil()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="tutupProfil()">&times;</span>
+
+            <img id="p-foto" src="" alt="Foto Profil" class="profile-pic">
+
+            <h2 id="p-nama">Nama Lengkap</h2>
+            <div class="role-badge" id="p-role">Role</div>
+
+            <div class="info-row">
+                <strong>Nomor Induk Mahasiswa</strong>
+                <span id="p-nim">-</span>
+            </div>
+
+            <div class="info-row">
+                <strong>Hobi & Minat</strong>
+                <span id="p-hobi">-</span>
+            </div>
+
+            <div class="info-row">
+                <strong>Cita-Cita</strong>
+                <span id="p-cita">-</span>
+            </div>
+
+            <div class="quote-box">
+                "<span id="p-quote">Quotes here</span>"
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Laba Pintar Elite. Platform Perhitungan Profitabilitas Profesional.</p>
+    </footer>
+
+    <script src="fungsi_perhitungan.js"></script>
+    <script>
+        const dataTim = {
+            'rizqy': {
+                nama: "Rizqy Naufal Pradana",
+                nim: "241110088",
+                role: "Leader Developer",
+                hobi: "Fullstack Coding, Gaming, Futsal",
+                cita: "GovTech Engineer Expert",
+                quote: "Berjalan Tak Seperti Rencana adalah Jalan Yang Sudah Biasa dan Jalan Satu Satunya Jalani Sebaik Kau Bisa",
+                foto: "https://raw.githubusercontent.com/riskinew301-sketch/laba-pintar-apps/main/WhatsApp_Image_2026-01-11_at_11.11.05-removebg-preview.png"
+            },
+            'bayu': {
+                nama: "K Bayu Nugroho",
+                nim: "241XXXXXX",
+                role: "Lead UI/UX Designer",
+                hobi: "Graphic Design, Photography",
+                cita: "Creative Director",
+                quote: "Desain bukan hanya tentang tampilan, tapi tentang bagaimana itu bekerja.",
+                foto: "https://ui-avatars.com/api/?name=Bayu+Nugroho&background=3b82f6&color=fff&size=200"
+            },
+            'yasir': {
+                nama: "M Yasir Al Fatah",
+                nim: "X241XXXXX",
+                role: "Head of Research",
+                hobi: "Reading, Market Analysis",
+                cita: "Business Consultant",
+                quote: "Data adalah kompas di lautan bisnis yang penuh ketidakpastian.",
+                foto: "https://ui-avatars.com/api/?name=Yasir+Fatah&background=10b981&color=fff&size=200"
+            }
+        };
+
+        function bukaProfil(id) {
+            const data = dataTim[id];
+            if (data) {
+                document.getElementById('p-nama').innerText = data.nama;
+                document.getElementById('p-nim').innerText = data.nim;
+                document.getElementById('p-role').innerText = data.role;
+                document.getElementById('p-hobi').innerText = data.hobi;
+                document.getElementById('p-cita').innerText = data.cita;
+                document.getElementById('p-quote').innerText = data.quote;
+
+                // Fallback image handling
+                const img = document.getElementById('p-foto');
+                img.src = data.foto;
+                img.onerror = function () {
+                    this.src = `https://ui-avatars.com/api/?name=${data.nama.replace(/ /g, '+')}&background=d4af37&color=000&size=200`;
+                };
+
+                document.getElementById('modalOverlay').style.display = 'flex';
+            }
+        }
+
+        function tutupProfil() {
+            document.getElementById('modalOverlay').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
